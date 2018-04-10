@@ -1,0 +1,470 @@
+@import url("whitespace-reset.css");
+
+body {
+  font: normal 16px helvetica, arial, sans-serif;
+  width: 1190px;
+}
+
+a {
+  text-decoration: none;
+}
+/* Header */
+
+header {
+  padding-top: 55px;
+  float: left;
+  width: 300px;
+  background: #464f77;
+  color: #b2b5c3;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+
+header h1 {
+  padding: 15px 0 10px 100px;
+  color: #fff;
+  position: relative;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+header h1:last-of-type {
+  margin-top: 30px;
+  padding: 15px 0 10px 100px;
+}
+
+header h1:before {
+  position: absolute;
+  display: inline-block;
+  left: 65px;
+  bottom: 10px;
+  content: " ";
+  height: 26px;
+  width: 26px;
+  background: url("../img/list_icon.png");
+}
+
+header h1:last-of-type:before {
+  background: url("../img/complete_icon.png");
+}
+
+header span,
+main h1 span {
+  font-weight: 100;
+  font-size: 14px;
+  position: absolute;
+  display: inline-block;
+  right: 25px;
+  background: #6b7292;
+  padding: 1px 5px;
+  border-radius: 16px;
+}
+
+header h1 span {
+  color: #b2b5c3;
+  padding: 1px 4px;
+}
+
+
+header nav {
+  width: 100%;
+}
+
+header li {
+  position: relative;
+  padding: 12px 0 12px 100px;
+}
+
+header li a {
+  color: #b2b5c3;
+  font-weight: 300;
+}
+
+header h1,
+header span {
+  cursor: pointer;
+}
+
+main li div.blue a.show_modal:hover {
+  color: #148fd5;
+}
+
+header li.active,
+header li.active a,
+h1.active {
+  color: #fff;
+}
+
+.active {
+  background: #383f5f;
+  color: #fff;
+}
+
+header li.active,
+h1.active {
+  background: #383f5f;
+}
+
+.active span {
+  color: #fff;
+  background: #148fd5;
+}
+
+li.active span,
+main h1 span,
+h1.active span {
+  background: #148fd5;
+}
+
+.completed-todos {
+  text-decoration: line-through;
+}
+
+
+/* Main Area */
+
+main {
+  float: left;
+  max-width: 860px;
+  width: 55vw;
+  height: 100%;
+  margin: 0 0 0 2%;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+main h1 {
+  margin: 70px 0 0 0;
+  font-size: 21px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+main h1 span {
+  text-align: right;
+  position: static;
+  color: #fff;
+  vertical-align: 3px;
+  margin-left: 20px;
+}
+
+.add {
+  color: #148fd5;
+}
+
+.add:before {
+  display: inline-block;
+  margin-right: 17px;
+  content: " ";
+  height: 13px;
+  width: 13px;
+  background: url("../img/add_icon.png");
+}
+
+body:before,
+body:after {
+  content: "";
+  display: table;
+}
+body:after {
+  clear: both;
+}
+body {
+  clear: both;
+  *zoom: 1;
+}
+
+
+/* List Items */
+
+.add + ul {
+  margin-top: 10px;
+}
+
+main li form,
+main li button {
+  display: inline-block;
+}
+
+main li div {
+  position: static;
+  display: inline-block;
+}
+
+main li .blue {
+  padding: 15px 0 15px 10px;
+  min-width: 90%;
+  height: 100%;
+}
+
+main li div.red {
+  box-sizing: border-box;
+  padding: 15px 12px;
+  width: 6%;
+}
+
+main li div.red:hover {
+  background: rgba(255, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+main li .blue:hover {
+  background: rgba(0,100,205, 0.2);
+}
+
+
+
+main li {
+  position: relative;
+  border-top: 1px solid #e7e7e9;
+}
+
+
+/* main li a should change to li form + label */
+main li a,
+li form + label {
+  color: #060606;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+
+li .check button,
+li .checked button {
+    height: 15px;
+    width: 15px;
+    color: transparent;
+    border: 1px solid #666666;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+li .checked + a {
+  text-decoration: line-through;
+  color: #b3b3b3;
+}
+
+li .checked button {
+  border: none;
+  background: url("../img/checkbox_icon.png");
+}
+
+
+li .delete button {
+  color: transparent;
+  border: none;
+  height: 17px;
+  width: 16px;
+  margin: auto auto;
+  background: url("../img/trashbin_icon.png");
+}
+
+
+li .check input[name="completed"] + button {
+  background: url("../img/checkbox_icon.png");
+}
+
+
+/* MODAL */
+
+#modal {
+  display: none;
+}
+
+.popup {
+  display: none; 
+}
+
+div {
+  position: absolute;
+}
+
+
+
+#modal:checked + .wrapper form {
+  position: absolute;
+  display: block;
+  top: -60px;
+  left: 74px;
+  width: 575px;
+  height: 400px;
+  background: #fff;
+  z-index: 2;
+}
+
+
+.popup {
+  position: absolute;
+  z-index: 2;
+  background: #fff;
+}
+
+.wrapper {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,.4);
+  content: "";
+  cursor: default;
+  z-index: 0;
+}
+
+
+/* Form */
+
+span.error {
+  position: absolute;
+  top: 40px;
+  left: -10px;
+  color: red;
+  width: 400px;
+}
+
+form.popup {
+  position: absolute;
+  padding: 40px 40px 40px 30px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+form.popup fieldset {
+  height: 100%;
+}
+
+form dl {
+  padding: 0;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+form dt {
+  display: inline-block;
+  width: 100px;
+}
+
+form .full-column {
+  width: 396px;
+}
+
+form dd {
+  display: inline-block;
+  width: 396px;
+}
+
+form input,
+form textarea,
+form select {
+  box-sizing: border-box;
+  padding-left: 10px;
+  font-size: 16px;
+  border-radius: 0;
+}
+
+form dd.full-column {
+  position: relative;
+}
+
+form input,
+form select {
+  line-height: 34px;
+}
+
+form select {
+  width: 100%;
+  border: 1px solid #b3b3b3;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("../img/arrow.png") 90% 50% no-repeat ;
+}
+
+.one-third {
+  width: 29%;
+}
+
+form input[type="text"] {
+  width: 100%;
+  border: 1px solid #b3b3b3;
+}
+
+dl textarea {
+  width: 396px;
+  height: 140px;
+  border: 1px solid #b3b3b3;
+  resize: none;
+}
+dl span {
+  display: inline-block;
+  text-align: center;
+  width: 25px;
+}
+
+.align-top dt {
+  height: 100%;
+  vertical-align: top;
+}
+
+select option:first {
+  color: #c6c6c6;
+}
+
+.btn {
+  display: inline-block;
+  margin-right: 20px;
+  width: 42%;
+  background: #148fd5;
+  color: #fff;
+  height: 35px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 300;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  header {
+    display: none;
+  }
+  body {
+    width: 768px;
+  }
+
+  #menu-toggle:checked + header {
+    display: inline-block;
+  }
+
+  label[for="menu-toggle"] {
+    display: inline-block;
+    content: "";
+    cursor: pointer;
+    height: 18px;
+    width: 23px;
+    background: url("../img/menu.png");
+    margin-top:10px;
+  }
+
+  main {
+    width: 80vw;
+  }
+
+  #menu-toggle:checked + header + main {
+    width: 400px;
+  }
+
+
+  #modal:checked + .wrapper form {
+  top: -60px;
+  left: 0;
+  width: 475px;
+  height: 500px;
+  }
+  main li .blue {
+    min-width: 85%;
+  }
+}

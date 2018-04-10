@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Todo List | Steven Fischer</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="/javascripts/jquery.js"></script>
+    <script type="text/javascript" src="/javascripts/handlebars.js"></script>
+  </head>
+  <body>
+    <input type="checkbox" id="menu-toggle">
+    <header></header>
+    <main></main>
+   
+    <!-- Scripts -->
+    <script id="both_todos_template" type="text/x-handlebars-template">
+      {{#each list}}
+        {{#if both}}
+          {{> all }}
+        {{else}}
+          {{> completed}}
+        {{/if}}
+      {{/each}}  
+    </script>
+    
+    <script id="all_todos_template" type="text/x-handlebars-template" data-type="partial" data-partial-name="all">
+        <h1 class="active">All Todos <span>{{total}}</span></h1>
+        <nav class="all-todos">
+          <ul>
+            {{#each dates}}
+              <li><a href="#" >{{date}}</a><span>{{number}}</span></li>
+            {{/each}}
+          </ul>
+        </nav>
+    </script>
+
+    <script id="all_completed_todos_template" type="text/x-handlebars-template" data-type="partial" data-partial-name="completed">
+      <h1>Completed <span>{{total}}</span></h1>
+      <nav class="completed-todos">
+        <ul>
+            {{#each dates}}
+              <li><a href="#" >{{date}}</a><span>{{number}}</span></li>
+            {{/each}}
+          </ul>
+      </nav>
+    </script>
+
+
+    <!-- Main html -->
+    <script id="main_template" type="text/x-handlebars-template" >
+      <label for="menu-toggle"></label>
+      
+      <h1>{{title}}<span>{{ todos_list.length}}</span></h1>
+      <a href="#" class="add">Add new to do</a>
+        {{> todos}}
+    </script>  
+    <!-- Each todo item, this is a partial -->
+    <script id="main_todo_item_template" type="text/x-handlebars-template" data-type="partial" data-partial-name="todo">
+       <li data-id={{id}}>
+        <div class="blue">
+          <form action="" method="post" 
+
+          class={{#if completed}}
+                  checked
+                {{else}} 
+                  check
+                {{/if}}
+          >
+            <input type="hidden" name="incomplete">
+            <button type="submit">complete</button>
+          </form>
+
+          <a class="show_modal" href="">{{title}} - 
+          {{#if bothDates}}
+            {{bothDates}}
+          {{else}}
+            No Due Date
+          {{/if}}
+          </a>
+        </div>
+        <div class="red">
+          <form data-id={{id}} action="#" method="post" class="delete">
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+        </li>
+    </script>
+    <!-- Todo template -->
+    <script id="main_todos_template" type="text/x-handlebars-template" data-type="partial" data-partial-name="todos">
+
+      <ul>
+        {{#each todos_list}}
+        {{> todo}}
+        {{/each}}
+      </ul>
+    </script>
+    <!-- Modal  -->
+    <script id="modal_template" type="text/x-handlebars-template">
+          <input type="checkbox" id="modal">
+          <div class="wrapper"></div>
+            <form data-id="{{id}}" action="#" method="post" class="popup" novalidate="true">
+              <fieldset>
+                
+                <dl>
+                  <dt>
+                    <label for="title">Title</label>
+                  </dt><!--
+                  --><dd class="full-column">
+                    <input type="text" placeholder="Item 1" name="title" id="title" value="{{title}}" required pattern=".{3,}">
+                    <span class="error"></span>
+                  </dd>
+                </dl>
+                
+                <dl>
+                  <dt>
+                    <label for="day">
+                      Due Date
+                    </label>
+                  </dt><!--
+                  --><dd>
+                    <select name="day" id="day" class="one-third">
+                     {{> days}}
+                    </select><!--
+                  --><span>/</span><!--
+                  --><select name="month" id="month" class="one-third">
+                      {{> months}}
+                    </select><!--
+
+                  --><span>/</span><!--
+
+                  --><select name="year" id="year" class="one-third">
+                      {{> years}}
+                    </select>
+                  </dd>
+                </dl>
+                
+                <dl class="align-top">
+                  <dt>
+                    <label for="description">
+                    </label>
+                  </dt><!--
+                  
+                  --><dd>
+                    <textarea rows="6" cols="45" id="description" name="description" placeholder="Description">{{description}}</textarea>
+                  </dd>
+                </dl>
+                
+                <dl>
+                  <dt>
+                  </dt>
+                  <dd>
+                    <input id="save" type="submit" value="Save" class="btn"><!--
+                    --><input id="mark_complete" type="submit" value="Mark as Complete" class="btn">
+                  </dd>
+                </dl>
+              </fieldset>
+            </form>
+    </script>
+
+
+    <script id="days_template" type="text/x-handlebars-template" data-type="partial" data-partial-name="days">
+      <option selected="true">Day</option>
+        {{#each days}}
+          <option
+            {{#if selected}}
+              selected
+            {{/if}}
+           value="{{value}}">{{day}}</option>
+        {{/each}}
+    </script>
+
+    <script id="months_template" type="text/x-handlebars-template" data-type="partial" data-partial-name="months">
+      <option>Month</option>
+        {{#each months}}
+          <option
+            {{#if selected}}
+              selected
+            {{/if}}
+           value="{{value}}">{{month}}</option>
+        {{/each}}
+    </script>
+    <script id="years_template" type="text/x-handlebars-template" data-type="partial" data-partial-name="years">
+      <option>Year</option>
+        {{#each years}}
+          <option
+            {{#if selected}}
+              selected
+            {{/if}}
+           value="{{value}}">{{year}}</option>
+        {{/each}}
+    </script>
+    <!-- Application code -->
+    <script src="/javascripts/todos.js"></script>
+  </body>
+</html>
